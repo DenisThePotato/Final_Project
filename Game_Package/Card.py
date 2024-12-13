@@ -96,7 +96,7 @@ class Card:
 
     @staticmethod
     def verify_card_validity(card):
-        """verify the two objects being compared"""
+        """verify the cards validity"""
         if type(card) is not Card:
             raise TypeError
         Card.verify_value(card)
