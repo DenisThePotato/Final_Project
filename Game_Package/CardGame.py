@@ -19,8 +19,6 @@ class CardGame:
                 for j in range(hand_size):
                     self.players[i].add_card(deck.deal_one())
 
-
-
     def get_winner(self):
         card_amounts = self.players_card_amount()
         maximum_cards = max(card_amounts)
@@ -35,7 +33,6 @@ class CardGame:
         for i in self.players:
             card_amounts.append(len(i.player_deck))
         return card_amounts
-
 
     @staticmethod
     def verify_names(names):
