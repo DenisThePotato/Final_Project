@@ -2,47 +2,30 @@ from Game_Package.Card import Card
 from Game_Package.DeckOfCards import DeckOfCards
 from Game_Package.Player import Player
 
+# 2 players ONLY
 class CardGame:
-    def __init__(self, names, hand_size):
+    def __init__(self, name1, name2, hand_size):
         self.deck = None
-        self.players = None
-        self.new_game(names, hand_size)
+        self.player1 = None
+        self.player2 = None
+        self.new_game(name1, name2, hand_size)
 
-    def new_game(self, names, hand_size):
-        if self.deck is not None and self.players is not None:
-            deck = DeckOfCards()
-            deck.cards_shuffle()
-            self.deck = deck
-            self.players = []
-            for i in range(len(names)):
-                self.players.append(Player(names[i], hand_size))
-                for j in range(hand_size):
-                    self.players[i].add_card(deck.deal_one())
+    def new_game(self, name1, name2, hand_size):
+        if self.deck is not None and self.player1 is not None and self.player2 is not None:
+            self.deck = DeckOfCards()
+            self.deck.cards_shuffle()
+            self.player1 = Player(name1, hand_size)
+            self.player2 = Player(name2, hand_size)
+        print("Error - method called from outside __init__")
 
     def get_winner(self):
-        card_amounts = self.players_card_amount()
-        maximum_cards = max(card_amounts)
-        if card_amounts.count(maximum_cards) > 1:
-            return None
-        winner_index = card_amounts.index(maximum_cards)
-        return self.players[winner_index]
-
-    def players_card_amount(self):
-        """returns a list with the player card amounts at the same indices of the correlated list of players"""
-        card_amounts = []
-        for i in self.players:
-            card_amounts.append(len(i.player_deck))
-        return card_amounts
-
-    @staticmethod
-    def verify_names(names):
-        if type(names) is not list:
-            raise TypeError
-        for name in names:
-            if type(name) is not str:
-                raise TypeError
-            if not len(name) > 0:
-                raise ValueError
+        player1_cards = len(self.player1.player_deck)
+        player2_cards = len(self.player2.player_deck)
+        if player1_cards > player2_cards:
+            return self.player1
+        if player1_cards < player2_cards:
+            return self.player2
+        return None
 
     @staticmethod
     def replace_invalid_names_with_bob(names):
@@ -53,6 +36,6 @@ class CardGame:
                 bob_number += 1
 
     @staticmethod
-    def verify_card_player_number(self, players, hand_size):
+    def verify_card_player_number(players, hand_size):
         if players * hand_size > 52:
             raise ValueError

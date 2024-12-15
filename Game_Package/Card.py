@@ -18,12 +18,10 @@ class Card:
     def __gt__(self, other : 'Card'):
         """verifies the two cards for comparison, and compares them.
             raises exceptions when the objects are not valid"""
-        self.verify_card_validity(self)
         self.verify_card_validity(other)
-        if self.value == other.value:   # value is the same, suit is larger
-            if self.suit > other.suit:
-                return True
-        if self.value > other.value:   # value is larger
+        if self.value == other.value and self.suit > other.suit:   # same value, larger suit
+            return True
+        if self.value > other.value:   # larger value
             return True
         return False
 
