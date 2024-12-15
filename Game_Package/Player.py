@@ -9,22 +9,28 @@ class Player:
         self.hand_size = self.verify_hand_size(hand_size)
         self.player_deck = []
 
-    def set_hand(self, card_deck : DeckOfCards):
+    def __str__(self)-> str:
+        return f"{self.player_name}"
+
+    def set_hand(self, card_deck : DeckOfCards)-> None:
+        """fills the players deck with required amount of cards"""
         self.hand_size = self.verify_hand_size(self.hand_size)
         for i in range(self.hand_size):
             self.player_deck.append(card_deck.deal_one())
 
-    def get_card(self):
-        if self.verify_deck_not_empty():
+    def get_card(self)-> Card:
+        """deletes a card from the players deck and returns it"""
+        if len(self.player_deck) > 0:
             return self.player_deck.pop(randint(0, len(self.player_deck) - 1))
 
-    def add_card(self, card : Card):
+    def add_card(self, card : Card)-> None:
         """validates the card and then adds it to the players deck"""
-        Card.verify_card_validity(card)
+        if type(card) is not Card:
+            raise TypeError
         self.player_deck.append(card)
 
     @staticmethod
-    def verify_player_name(name)-> str:
+    def verify_player_name(name: str)-> str:
         if type(name) is not str:
             raise TypeError
         if len(name) == 0:
@@ -32,16 +38,10 @@ class Player:
         return capwords(name)
 
     @staticmethod
-    def verify_hand_size(size):
+    def verify_hand_size(size: int)-> int:
         if type(size) is not int:
             raise TypeError
         if not 10 <= size <= 26:
             return 26
         else:
             return size
-
-    def verify_deck_not_empty(self):
-        """verifies that the card list is not empty"""
-        if len(self.player_deck) > 0:
-            return True
-        return False

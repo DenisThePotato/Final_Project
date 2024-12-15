@@ -8,14 +8,17 @@ class CardGame:
         self.deck = None
         self.player1 = None
         self.player2 = None
+        self.hand_size = None
         self.new_game(name1, name2, hand_size)
 
     def new_game(self, name1, name2, hand_size):
-        if self.deck is not None and self.player1 is not None and self.player2 is not None:
+        if self.deck is None:
             self.deck = DeckOfCards()
             self.deck.cards_shuffle()
             self.player1 = Player(name1, hand_size)
             self.player2 = Player(name2, hand_size)
+            self.player1.set_hand(self.deck)
+            self.player2.set_hand(self.deck)
         print("Error - method called from outside __init__")
 
     def get_winner(self):
