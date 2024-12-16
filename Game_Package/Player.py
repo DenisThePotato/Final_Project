@@ -4,7 +4,7 @@ from random import randint
 from Game_Package.Card import Card
 
 class Player:
-    def __init__(self, player_name: str, hand_size: int):
+    def __init__(self, player_name: str, hand_size: int)-> None:
         self.player_name = self.verify_player_name(player_name)
         self.hand_size = self.verify_hand_size(hand_size)
         self.player_deck = []
@@ -12,19 +12,7 @@ class Player:
     def __str__(self)-> str:
         return f"{self.player_name}"
 
-    def __eq__(self, other):
-        if self.player_name != other.player_name:
-            return False
-        if self.hand_size != other.hand_size:
-            return False
-        if len(self.player_deck) != len(other.player_deck):
-            return False
-        for i in range(len(self.player_deck)):
-            if self.player_deck[i] != other.player_deck[i]:
-                return False
-        return True
-
-    def set_hand(self, card_deck : DeckOfCards)-> None:
+    def set_hand(self, card_deck: DeckOfCards)-> None:
         """fills the players deck with required amount of cards"""
         self.hand_size = self.verify_hand_size(self.hand_size)
         for i in range(self.hand_size):
@@ -35,7 +23,7 @@ class Player:
         if len(self.player_deck) > 0:
             return self.player_deck.pop(randint(0, len(self.player_deck) - 1))
 
-    def add_card(self, card : Card)-> None:
+    def add_card(self, card: Card)-> None:
         """validates the card and then adds it to the players deck"""
         if type(card) is not Card:
             raise TypeError

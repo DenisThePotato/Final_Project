@@ -9,9 +9,6 @@ class TestPlayer(TestCase):
         self.player = Player("bob", 20)
         self.player.player_deck.append(Card(2, 2))
 
-    def tearDown(self):
-        pass
-
     def test_init_valid_hand_size_high(self):
         player = Player("bob", 26)
         self.assertEqual(26, player.hand_size)

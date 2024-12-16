@@ -3,14 +3,15 @@ from Game_Package.DeckOfCards import DeckOfCards
 from Game_Package.Player import Player
 
 class CardGame:
-    def __init__(self, name1, name2, hand_size):
+    def __init__(self, name1: str, name2: str, hand_size: int)-> None:
+        if name1 == name2:
+            raise ValueError
         self.deck = None
         self.player1 = None
         self.player2 = None
-        self.hand_size = None
         self.new_game(name1, name2, hand_size)
 
-    def new_game(self, name1, name2, hand_size):
+    def new_game(self, name1: str, name2: str, hand_size: int)-> None:
         if self.deck is None:
             self.deck = DeckOfCards()
             self.deck.cards_shuffle()
@@ -18,9 +19,10 @@ class CardGame:
             self.player2 = Player(name2, hand_size)
             self.player1.set_hand(self.deck)
             self.player2.set_hand(self.deck)
-        print("Error - method called from outside __init__")
+        else:
+            print("Error - method called from outside __init__")
 
-    def get_winner(self):
+    def get_winner(self)-> Player or None:
         player1_cards = len(self.player1.player_deck)
         player2_cards = len(self.player2.player_deck)
         if player1_cards > player2_cards:
@@ -30,14 +32,14 @@ class CardGame:
         return None
 
     @staticmethod
-    def replace_invalid_names_with_bob(names):
+    def replace_invalid_names_with_bob(names: list)-> None:
         bob_number = 1
         for index in range(len(names)):
             if type(names[index]) is not str:
-                names[index] = f"bob{bob_number}"
+                names[index] = f"Bob{bob_number}"
                 bob_number += 1
 
     @staticmethod
-    def verify_card_player_number(players, hand_size):
+    def verify_card_player_number(players: list, hand_size: int)-> None:
         if players * hand_size > 52:
             raise ValueError

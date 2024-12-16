@@ -6,9 +6,6 @@ class TestCard(TestCase):
         self.high_card = Card(4, 13)
         self.low_card = Card(1, 1)
 
-    def tearDown(self):
-        pass
-
     def test_init_valid_high(self):
         self.assertEqual(4, self.high_card.suit)
         self.assertEqual(13, self.high_card.value)

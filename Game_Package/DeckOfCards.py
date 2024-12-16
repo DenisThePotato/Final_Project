@@ -3,7 +3,7 @@ from random import shuffle
 from random import randint
 
 class DeckOfCards:
-    def __init__(self):
+    def __init__(self)-> None:
         self.card_list = []
         for i in range(4):
             for j in range(13):

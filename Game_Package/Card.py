@@ -1,7 +1,7 @@
 # a class representing a  single card in a deck of 52 cards.
 # each card has a suit from 1 to 4, and a value from 1 to 13.
 class Card:
-    def __init__(self, suit : int, value : int):
+    def __init__(self, suit: int, value: int)-> None:
         """gets two int values and creates an object"""
         self.verify_suit(suit)
         self.verify_value(value)
@@ -28,6 +28,8 @@ class Card:
             return True
         return False
 
+
+    # a dictionary would be more fitting
     def value_to_str(self)-> str:
         """returns the string associated with the value of the card"""
         match self.value:

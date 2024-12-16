@@ -5,9 +5,6 @@ class TestDeckOfCards(TestCase):
     def setUp(self):
         self.deck = DeckOfCards()
 
-    def tearDown(self):
-        pass
-
     def test_cards_shuffle(self):
         """this test will fail with a chance of (1/52)**len(card_list)"""
         deck = []

@@ -6,20 +6,23 @@ class TestCardGame(TestCase):
     def setUp(self):
         self.card_game = CardGame("bob", "bobby", 20)
 
-    def tearDown(self):
-        pass
-
     def test_init_valid(self):
-        card_game = CardGame("bob", "bobby", 20)
-        self.assertEqual(Player("bob", 20), self.card_game.player1)
-        self.assertEqual(Player("bobby", 20), self.card_game.player2)
-        self.assertEqual(20, card_game.hand_size)
+        self.assertEqual("Bob", self.card_game.player1.player_name)
+        self.assertEqual("Bobby", self.card_game.player2.player_name)
+        self.assertEqual(20, len(self.card_game.player1.player_deck))
+        self.assertEqual(20, len(self.card_game.player2.player_deck))
+        self.assertTrue(self.card_game.deck is not None)
+        self.assertEqual(12, len(self.card_game.deck.card_list))
 
-    def test_init_invalid_name(self):
+    def test_init_invalid_name_type(self):
         with self.assertRaises(TypeError):
             CardGame(123, "bob", 20)
         with self.assertRaises(TypeError):
             CardGame("bob", 123, 20)
+
+    def test_init_invalid_name_same(self):
+        with self.assertRaises(ValueError):
+            CardGame("bob", "bob", 20)
 
     def test_init_invalid_hand_size(self):
         with self.assertRaises(TypeError):
