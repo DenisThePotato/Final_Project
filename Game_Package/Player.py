@@ -4,7 +4,7 @@ from random import randint
 from Game_Package.Card import Card
 
 class Player:
-    def __init__(self, player_name, hand_size):
+    def __init__(self, player_name: str, hand_size: int):
         self.player_name = self.verify_player_name(player_name)
         self.hand_size = self.verify_hand_size(hand_size)
         self.player_deck = []
@@ -18,7 +18,7 @@ class Player:
         for i in range(self.hand_size):
             self.player_deck.append(card_deck.deal_one())
 
-    def get_card(self)-> Card:
+    def get_card(self)-> Card or None:
         """deletes a card from the players deck and returns it"""
         if len(self.player_deck) > 0:
             return self.player_deck.pop(randint(0, len(self.player_deck) - 1))

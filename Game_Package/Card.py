@@ -3,6 +3,8 @@
 class Card:
     def __init__(self, suit : int, value : int):
         """gets two int values and creates an object"""
+        self.verify_suit(suit)
+        self.verify_value(value)
         self.value = value
         self.suit = suit
 
