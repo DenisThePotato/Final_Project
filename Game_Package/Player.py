@@ -12,6 +12,18 @@ class Player:
     def __str__(self)-> str:
         return f"{self.player_name}"
 
+    def __eq__(self, other):
+        if self.player_name != other.player_name:
+            return False
+        if self.hand_size != other.hand_size:
+            return False
+        if len(self.player_deck) != len(other.player_deck):
+            return False
+        for i in range(len(self.player_deck)):
+            if self.player_deck[i] != other.player_deck[i]:
+                return False
+        return True
+
     def set_hand(self, card_deck : DeckOfCards)-> None:
         """fills the players deck with required amount of cards"""
         self.hand_size = self.verify_hand_size(self.hand_size)

@@ -2,7 +2,6 @@ from Game_Package.Card import Card
 from Game_Package.DeckOfCards import DeckOfCards
 from Game_Package.Player import Player
 
-# 2 players ONLY
 class CardGame:
     def __init__(self, name1, name2, hand_size):
         self.deck = None
