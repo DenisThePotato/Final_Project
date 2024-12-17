@@ -1,5 +1,6 @@
 from unittest import TestCase
 from Game_Package.CardGame import CardGame
+from Game_Package.DeckOfCards import DeckOfCards
 from Game_Package.Player import Player
 
 class TestCardGame(TestCase):
@@ -37,7 +38,15 @@ class TestCardGame(TestCase):
         self.assertEqual(26 ,len(card_game.player1.player_deck))
 
     def test_new_game_invalid_not_init(self):
-        self.assertEqual(type(None), type(self.card_game.new_game("bob", "bobby", 20)))
+        card_game = CardGame("bob", "bobby", 5)
+        player1_clone = card_game.player1
+        player2_clone = card_game.player2
+        deck_clone = card_game.deck
+        card_game.new_game()
+        self.assertEqual(player1_clone.player_deck, card_game.player1.player_deck)
+        self.assertEqual(player2_clone.player_deck, card_game.player2.player_deck)
+        self.assertEqual(deck_clone, card_game.deck)
+        # check that called from outside __init__ print happened
 
     def test_get_winner_valid(self):
         self.card_game.player1.get_card()
