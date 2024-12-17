@@ -24,9 +24,17 @@ class TestCardGame(TestCase):
         with self.assertRaises(ValueError):
             CardGame("bob", "bob", 20)
 
-    def test_init_invalid_hand_size(self):
+    def test_init_invalid_hand_size_type(self):
         with self.assertRaises(TypeError):
             CardGame("bobby", "bob", "20")
+
+    def test_init_invalid_hand_size_low(self):
+        card_game = CardGame("bobby", "bob", 9)
+        self.assertEqual(26, len(card_game.player1.player_deck))
+
+    def test_init_invalid_hand_size_high(self):
+        card_game = CardGame("bobby", "bob", 27)
+        self.assertEqual(26 ,len(card_game.player1.player_deck))
 
     def test_new_game_invalid_not_init(self):
         self.assertEqual(type(None), type(self.card_game.new_game("bob", "bobby", 20)))
