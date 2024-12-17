@@ -46,12 +46,12 @@ class TestCard(TestCase):
     def test_gt_valid_greater_value(self):
         self.assertTrue(self.high_card > self.low_card)
 
-    def test_gt_valid_greater_suit(self):
+    def test_gt_valid_greater_suit_same_value(self):
         self.low_card.value = 13
         self.assertTrue(self.high_card > self.low_card)
 
     def test_gt_valid_equal(self):
-        self.assertFalse(self.high_card > self.high_card)
+        self.assertFalse(self.high_card > self.high_card) # two separate objects
 
     def test_gt_valid_lower(self):
         self.assertFalse(self.low_card > self.high_card)

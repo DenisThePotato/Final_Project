@@ -7,83 +7,67 @@ class Card:
         self.verify_value(value)
         self.value = value
         self.suit = suit
+        self.value_to_str_dict = self.value_to_str()
+        self.suit_to_str_dict = self.suit_to_str()
 
     # NOT INCLUDED IN UNIT TESTS
     def __str__(self)-> str:
-        return f"{self.value_to_str()} of {self.suit_to_str()}"
+        return f"{self.value_to_str_dict[self.value]} of {self.suit_to_str_dict[self.suit]}"
 
     def __gt__(self, other : 'Card')-> bool:
         if type(other) is not Card:
-            raise TypeError
+            raise TypeError("object for comparison type is not card")
         if self.value == other.value and self.suit > other.suit:    # same value, larger suit
             return True
-        if self.value > other.value:    # larger value
-            return True
-        return False
+        return self.value > other.value    # larger value
 
     def __eq__(self, other : 'Card')-> bool:
         if type(other) is not Card:
-            raise TypeError
-        if self.value == other.value and self.suit == other.suit:
-            return True
-        return False
+            raise TypeError("object for comparison type is not card")
+        return self.value == other.value and self.suit == other.suit
 
 
-    # a dictionary would be more fitting
-    def value_to_str(self)-> str:
+    @staticmethod
+    def value_to_str()-> dict:
         """returns the string associated with the value of the card"""
-        match self.value:
-            case 1:
-                return "One"
-            case 2:
-                return "Two"
-            case 3:
-                return "Three"
-            case 4:
-                return "Four"
-            case 5:
-                return "Five"
-            case 6:
-                return "Six"
-            case 7:
-                return "Seven"
-            case 8:
-                return "Eight"
-            case 9:
-                return "Nine"
-            case 10:
-                return "Jack"
-            case 11:
-                return "Queen"
-            case 12:
-                return "King"
-            case 13:
-                return "Ace"
+        return {
+            1 : "Two",
+            2 : "Three",
+            3 : "Four",
+            4 : "Five",
+            5 : "Six",
+            6 : "Seven",
+            7 : "Eight",
+            8 : "Nine",
+            9 : "Ten",
+            10 : "Jack",
+            11 : "Queen",
+            12 : "King",
+            13 : "Ace"
+        }
 
-    def suit_to_str(self)-> str:
+    @staticmethod
+    def suit_to_str()-> dict:
         """returns the string associated with the suit of the card"""
-        match self.suit:
-            case 1:
-                return "Diamonds"
-            case 2:
-                return "Spades"
-            case 3:
-                return "Hearts"
-            case 4:
-                return "Clubs"
+        return {
+            1: "Diamonds",
+            2: "Spades",
+            3: "Hearts",
+            4: "Clubs"
+        }
 
     @staticmethod
     def verify_value(value: int)-> None:
         """verifies the value of the object"""
         if type(value) is not int:
-            raise TypeError
+            raise TypeError("value type is not of int")
         if not 1 <= value <= 13:
-            raise ValueError
+            raise ValueError("value value is not 1 <= value <= 13")
 
     @staticmethod
     def verify_suit(suit: int)-> None:
         """verifies the suit of the object"""
         if type(suit) is not int:
-            raise TypeError
+            raise TypeError("suit type is not int")
         if not 1 <= suit <= 4:
-            raise ValueError
+            raise ValueError("suit value is not 1 <= value <= 4")

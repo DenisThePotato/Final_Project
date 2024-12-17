@@ -34,7 +34,7 @@ class TestPlayer(TestCase):
             Player("", 20)
 
     @mock.patch('Game_Package.DeckOfCards.DeckOfCards.deal_one', return_value=Card(1, 1))
-    def test_set_hand(self, mock_deal_one):
+    def test_set_hand(self, mock_deal_one): # check deck state
         player = Player("bob", 20)
         player.set_hand(DeckOfCards())
         self.assertEqual(20, len(player.player_deck))

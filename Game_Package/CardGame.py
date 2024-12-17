@@ -5,7 +5,7 @@ from Game_Package.Player import Player
 class CardGame:
     def __init__(self, name1: str, name2: str, hand_size: int)-> None:
         if name1 == name2:
-            raise ValueError
+            raise ValueError("player names are the same")
         self.deck = None
         self.player1 = None
         self.player2 = None
@@ -30,16 +30,3 @@ class CardGame:
         if player1_cards < player2_cards:
             return self.player2
         return None
-
-    @staticmethod
-    def replace_invalid_names_with_bob(names: list)-> None:
-        bob_number = 1
-        for index in range(len(names)):
-            if type(names[index]) is not str:
-                names[index] = f"Bob{bob_number}"
-                bob_number += 1
-
-    @staticmethod
-    def verify_card_player_number(players: list, hand_size: int)-> None:
-        if players * hand_size > 52:
-            raise ValueError
