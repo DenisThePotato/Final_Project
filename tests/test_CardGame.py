@@ -46,7 +46,6 @@ class TestCardGame(TestCase):
         self.assertEqual(player1_clone.player_deck, card_game.player1.player_deck)
         self.assertEqual(player2_clone.player_deck, card_game.player2.player_deck)
         self.assertEqual(deck_clone, card_game.deck)
-        # check that called from outside __init__ print happened
 
     def test_get_winner_valid(self):
         self.card_game.player1.get_card()

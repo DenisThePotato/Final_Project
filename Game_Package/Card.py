@@ -10,7 +10,6 @@ class Card:
         self.value_to_str_dict = self.value_to_str()
         self.suit_to_str_dict = self.suit_to_str()
 
-    # NOT INCLUDED IN UNIT TESTS
     def __str__(self)-> str:
         return f"{self.value_to_str_dict[self.value]} of {self.suit_to_str_dict[self.suit]}"
 
@@ -29,7 +28,7 @@ class Card:
 
     @staticmethod
     def value_to_str()-> dict:
-        """returns the string associated with the value of the card"""
+        """returns a dictionary with the structure {value : value string representation}"""
         return {
             1 : "Two",
             2 : "Three",
@@ -48,7 +47,7 @@ class Card:
 
     @staticmethod
     def suit_to_str()-> dict:
-        """returns the string associated with the suit of the card"""
+        """returns a dictionary with the structure {suit value : suit string representation}"""
         return {
             1: "Diamonds",
             2: "Spades",

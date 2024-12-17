@@ -7,7 +7,7 @@ def main():
         name2 = input("player 2 name: ")
         try:
             hand_size = int(input("hand size: "))
-            game = CardGame(name1, name2, 26)
+            game = CardGame(name1, name2, hand_size)
             break
         except TypeError:
             print("game parameter types invalid. try again.")
